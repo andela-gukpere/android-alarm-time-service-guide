@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example"
+    android:versionCode="1"
+    android:versionName="1.0.1" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="22" />
+
+    <!--Request for Boot permission of the device -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!--Register the on Boot event Receiver-->
+        <receiver
+            android:name="com.example.BootReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!--Register the alarm receiver-->
+        <receiver
+            android:name="com.example.AlarmReceiver"
+            android:enabled="true" >
+        </receiver>
+
+        <!--Register the Time and Alarm Service-->
+        <service android:name="com.example.TimeService" >
+        </service>
+        <service android:name="com.example.AlarmService" >
+        </service>
+
+
+        <activity
+            android:name="com.example.MainActivity"
+            android:label="@string/app_name"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
